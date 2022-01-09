@@ -1,1 +1,135 @@
-<p>user-form works!</p>
+<div class="form-block">
+  <h4 class="text-center">Create user</h4>
+  <form class="form"
+        (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text"
+             class="form-control"
+             name="name"
+             id="name"
+             required
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="surname">Surname</label>
+      <input type="text"
+             class="form-control"
+             name="surname"
+             id="surname"
+             required
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="patronymic">Patronymic</label>
+      <input type="text"
+             class="form-control"
+
+             name="patronymic"
+             id="patronymic"
+             required
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone number (+996)XXX-XXX-XXX</label>
+      <input type="text"
+             name="phoneNumber"
+             id="phoneNumber"
+             class="form-control"
+             placeholder="(+996)XXX-XXX-XXX"
+             required
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="placeOfWorkStudy">Place of work/study</label>
+      <input type="text"
+             name="placeOfWorkStudy"
+             id="placeOfWorkStudy"
+             class="form-control"
+
+             required
+             ngModel>
+    </div>
+    <div class="t-shirt-option py-5">
+      <p class="pb-1">T-Shirt option</p>
+      <div class="pb-1 form-check">
+        <div class="form-group">
+          <input class="form-check-input"
+                 type="radio"
+                 name="TShirt"
+                 id="maleTShirt"
+                 value="male"
+                 #TShirt="ngModel"
+                 ngModel
+                 required
+          >
+          <label class="form-check-label"
+                 for="maleTShirt">
+            Male
+          </label>
+        </div>
+        <div class="form-group">
+          <input class="form-check-input"
+                 type="radio"
+                 name="TShirt"
+                 id="femaleTShirt"
+                 value="female"
+                 required
+                 ngModel
+          >
+          <label class="form-check-label"
+                 for="femaleTShirt">
+            Female
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="size">Size</label>
+      <select class="form-control"
+              id="size"
+              name="size"
+              required
+              ngModel>
+        <option selected></option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Description. You have <b>{{ currentSymbols }}</b> symbols left</label>
+      <textarea name="description"
+                id="description"
+                cols="30"
+                rows="10"
+                class="form-control"
+                maxlength="300"
+                required
+                ngModel
+      ></textarea>
+    </div>
+    <div class="form-group mt-5">
+      <button class="btn btn-outline-primary">add skill</button>
+      <div class="d-flex" style="margin-top: 20px;">
+        <select name="skill" id="skill" class="form-control">
+          <option selected>Select skill</option>
+          <option value="Javascript">Javascript</option>
+          <option value="Vue.js">Vue</option>
+          <option value="React">React</option>
+          <option value="Angular">Angular</option>
+        </select>
+        <select name="skill" class="form-control ml-5">
+          <option selected>Level of skill</option>
+          <option value="Javascript">Beginner</option>
+          <option value="Vue.js">Intermediate</option>
+          <option value="React">Advanced</option>
+          <option value="Angular">Expert</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-secondary my-5">create</button>
+  </form>
+</div>
+

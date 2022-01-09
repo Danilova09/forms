@@ -1,12 +1,17 @@
 <div class="header" style="background: #262626">
   <ul class="nav justify-content-center">
     <li class="nav-item">
-      <a class="nav-link text-light bg-primary py-3 "
-      routerLink="/">Users</a>
+      <a class="nav-link text-light py-3 "
+         routerLink="/"
+         routerLinkActive="bg-primary"
+         [routerLinkActiveOptions]="{exact: true}"
+      >Users</a>
     </li>
     <li class="nav-item">
       <a class="nav-link  text-light  py-3"
-      routerLink="users/new">Create user</a>
+         routerLink="users/new"
+         routerLinkActive="bg-primary"
+      [routerLinkActiveOptions]="{exact: true}">Create user</a>
     </li>
   </ul>
 </div>
