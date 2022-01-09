@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { UserItemComponent } from './users/user-item/user-item.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ValidatePhoneDirective } from './validate-phone-number.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     UsersComponent,
     UserItemComponent,
-    UserFormComponent
+    UserFormComponent,
+    ValidatePhoneDirective,
   ],
   imports: [
     BrowserModule,

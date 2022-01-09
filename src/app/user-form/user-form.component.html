@@ -1,44 +1,59 @@
 <div class="form-block">
   <h4 class="text-center">Create user</h4>
-  <form class="form"
-        (ngSubmit)="onSubmit()">
+  <form class="form" (ngSubmit)="onSubmit()" [formGroup]="userForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text"
-             class="form-control"
-             name="name"
              id="name"
-             required
-             ngModel>
+             formControlName="name"
+             [class]="fieldHasError('name', 'required') ? 'form-control is-invalid': 'form-control'"
+             name="name"
+      >
+      <small class="text-danger" *ngIf="fieldHasError('name', 'required')">
+        Enter your name!
+      </small>
     </div>
     <div class="form-group">
       <label for="surname">Surname</label>
       <input type="text"
              class="form-control"
              name="surname"
+             formControlName="surname"
+             [class]="fieldHasError('surname', 'required') ? 'form-control is-invalid': 'form-control'"
              id="surname"
-             required
-             ngModel>
+      >
+      <small class="text-danger" *ngIf="fieldHasError('surname', 'required')">
+        Enter your surname!
+      </small>
     </div>
     <div class="form-group">
       <label for="patronymic">Patronymic</label>
       <input type="text"
              class="form-control"
-
              name="patronymic"
              id="patronymic"
-             required
-             ngModel>
+             [class]="fieldHasError('patronymic', 'required') ? 'form-control is-invalid': 'form-control'"
+             formControlName="patronymic"
+      >
+      <small class="text-danger" *ngIf="fieldHasError('patronymic', 'required')">
+        Enter your patronymic!
+      </small>
     </div>
     <div class="form-group">
       <label for="phoneNumber">Phone number (+996)XXX-XXX-XXX</label>
       <input type="text"
              name="phoneNumber"
              id="phoneNumber"
-             class="form-control"
              placeholder="(+996)XXX-XXX-XXX"
-             required
-             ngModel>
+             [class]="fieldHasError('phoneNumber', 'required') ? 'form-control is-invalid': 'form-control'"
+             formControlName="phoneNumber"
+      >
+      <small class="text-danger" *ngIf="fieldHasError('phoneNumber', 'required')">
+        Enter your phone number!
+      </small>
+      <small class="text-danger" *ngIf="fieldHasError('phoneNumber', 'phone')">
+        Enter valid phone number!
+      </small>
     </div>
     <div class="form-group">
       <label for="placeOfWorkStudy">Place of work/study</label>
@@ -46,9 +61,12 @@
              name="placeOfWorkStudy"
              id="placeOfWorkStudy"
              class="form-control"
-
-             required
-             ngModel>
+             formControlName="placeOfWorkStudy"
+             [class]="fieldHasError('placeOfWorkStudy', 'required') ? 'form-control is-invalid': 'form-control'"
+      >
+      <small class="text-danger" *ngIf="fieldHasError('placeOfWorkStudy', 'required')">
+        Enter your place of work/study!
+      </small>
     </div>
     <div class="t-shirt-option py-5">
       <p class="pb-1">T-Shirt option</p>
@@ -59,9 +77,7 @@
                  name="TShirt"
                  id="maleTShirt"
                  value="male"
-                 #TShirt="ngModel"
-                 ngModel
-                 required
+                 formControlName="TShirt"
           >
           <label class="form-check-label"
                  for="maleTShirt">
@@ -74,14 +90,16 @@
                  name="TShirt"
                  id="femaleTShirt"
                  value="female"
-                 required
-                 ngModel
+                 formControlName="TShirt"
           >
           <label class="form-check-label"
                  for="femaleTShirt">
             Female
           </label>
         </div>
+        <small class="text-danger" *ngIf="fieldHasError('TShirt', 'required')">
+          Choose T-Shirt!
+        </small>
       </div>
     </div>
     <div class="form-group">
@@ -89,44 +107,71 @@
       <select class="form-control"
               id="size"
               name="size"
-              required
-              ngModel>
-        <option selected></option>
+              formControlName="size"
+              [class]="fieldHasError('size', 'required') ? 'form-control is-invalid': 'form-control'"
+      >
+        <option selected value="">Select size</option>
         <option value="S">S</option>
         <option value="M">M</option>
         <option value="L">L</option>
         <option value="XL">XL</option>
       </select>
+      <small class="text-danger" *ngIf="fieldHasError('size', 'required')">
+        Choose size!
+      </small>
     </div>
     <div class="form-group">
       <label for="description">Description. You have <b>{{ currentSymbols }}</b> symbols left</label>
-      <textarea name="description"
+      <textarea name="description" (input)="getCurrentSymbolsCount()"
                 id="description"
                 cols="30"
                 rows="10"
-                class="form-control"
-                maxlength="300"
-                required
-                ngModel
+                [class]="fieldHasError('description', 'required') ? 'form-control is-invalid': 'form-control'"
+                formControlName="description"
       ></textarea>
+      <small class="text-danger" *ngIf="fieldHasError('description', 'required')">
+        Enter description!
+      </small>
+      <small class="text-danger" *ngIf="fieldHasError('description', 'maxlength')">
+        Description should contain less then 300 symbols!
+      </small>
     </div>
     <div class="form-group mt-5">
-      <button class="btn btn-outline-primary">add skill</button>
-      <div class="d-flex" style="margin-top: 20px;">
-        <select name="skill" id="skill" class="form-control">
-          <option selected>Select skill</option>
-          <option value="Javascript">Javascript</option>
-          <option value="Vue.js">Vue</option>
-          <option value="React">React</option>
-          <option value="Angular">Angular</option>
-        </select>
-        <select name="skill" class="form-control ml-5">
-          <option selected>Level of skill</option>
-          <option value="Javascript">Beginner</option>
-          <option value="Vue.js">Intermediate</option>
-          <option value="React">Advanced</option>
-          <option value="Angular">Expert</option>
-        </select>
+      <button class="btn btn-outline-primary" (click)="addSkill()">add skill</button>
+      <div class="block" style="margin-top: 20px;" formArrayName="skills">
+        <div class="duplicating-skill-form" *ngFor="let skillForm of getSkillsControls(); let i = index">
+          <div class="form-group d-flex" [formGroupName]="i">
+            <div class="form-select" style="width: 100%">
+              <select name="skill" id="skill" style="width: 100%"
+                      [class]="fieldHasError('skill', 'required') ? 'form-control is-invalid': 'form-control'"
+                      formControlName="skillName">
+                <option selected value="">Select skill</option>
+                <option value="Javascript">Javascript</option>
+                <option value="Vue.js">Vue</option>
+                <option value="React">React</option>
+                <option value="Angular">Angular</option>
+              </select>
+              <small class="text-danger" *ngIf="fieldHasError('skill', 'required')">
+                Choose skill!
+              </small>
+            </div>
+            <div class="form-select ml-2" style="width: 100%">
+              <select name="skill" style="width: 100%"
+                      [class]="fieldHasError('skillLevel', 'required') ? 'form-control is-invalid': 'form-control'"
+                      formControlName="skillLevel">
+                <option selected value="">Level of skill</option>
+                <option value="Javascript">Beginner</option>
+                <option value="Vue.js">Intermediate</option>
+                <option value="React">Advanced</option>
+                <option value="Angular">Expert</option>
+              </select>
+              <small class="text-danger" *ngIf="fieldHasError('skillLevel', 'required')">
+                Choose skill level!
+              </small>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
     <button class="btn btn-secondary my-5">create</button>
