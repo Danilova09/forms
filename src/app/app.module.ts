@@ -8,6 +8,7 @@ import { UserItemComponent } from './users/user-item/user-item.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidatePhoneDirective } from './validate-phone-number.directive';
+import {  HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ValidatePhoneDirective } from './validate-phone-number.directive';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

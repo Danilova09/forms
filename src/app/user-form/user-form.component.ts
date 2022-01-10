@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { phoneValidator } from '../validate-phone-number.directive';
+import { UsersService } from '../shared/users.service';
+import { User } from '../shared/user.model';
+
+
 
 @Component({
   selector: 'app-user-form',
@@ -12,6 +16,10 @@ export class UserFormComponent {
   maxSymbols = 300;
   currentSymbols = 300;
 
+  constructor(
+    private usersService: UsersService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -65,6 +73,22 @@ export class UserFormComponent {
   getSkillsControls() {
     const skills = <FormArray>this.userForm.get('skills');
     return skills.controls;
+  }
+
+  saveUser() {
+    const user = new User(
+      'id',
+      this.userForm.controls.name.value,
+      this.userForm.controls.surname.value,
+      this.userForm.controls.patronymic.value,
+      this.userForm.controls.phoneNumber.value,
+      this.userForm.controls.placeOfWorkStudy.value,
+      this.userForm.controls.TShirt.value,
+      this.userForm.controls.size.value,
+      this.userForm.controls.description.value,
+      this.userForm.controls.skills.value,
+    );
+    this.usersService.addUser(user);
   }
 }
 

@@ -1,5 +1,11 @@
 <div class="users-block">
-  <app-user-item></app-user-item>
-  <app-user-item></app-user-item>
-  <app-user-item></app-user-item>
+  <div class="text-center mt-5" *ngIf="fetchingUsers">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="users-list" *ngIf="!fetchingUsers">
+    <app-user-item *ngFor="let user of users"
+                   [user]="user"></app-user-item>
+  </div>
 </div>
