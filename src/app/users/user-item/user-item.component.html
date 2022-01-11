@@ -1,18 +1,23 @@
 <div class="card mt-2">
   <div class="card-body">
-    <p>Name: Name</p>
-    <p>Surname: Surname</p>
-    <p>Patronymic: Patronymic</p>
-    <p>Phone number: +996 XXX YYY YYY</p>
-    <p>Place of work/study: somewhere</p>
-    <p>T-Shirt option: male</p>
-    <p>Size: S</p>
-    <p>Description: description</p>
-    <p>Skill: VUE.JS, level: intermediate</p>
+    <p>Name: {{ user.name }}</p>
+    <p>Surname: {{ user.surname }}</p>
+    <p>Patronymic: {{ user.patronymic }}</p>
+    <p>Phone number: {{ user.phoneNumber }}</p>
+    <p>Place of work/study: {{ user.placeOfWorkStudy }}</p>
+    <p>T-Shirt option: {{ user.TShirt }}</p>
+    <p>Size: {{ user.size }}</p>
+    <p>Description: {{ user.description }}</p>
+    <p *ngFor="let skill of user.skills ">Skill: {{ skill.skill }}, level: {{ skill.skillLevel }}</p>
   </div>
   <div class="card-footer d-flex justify-content-end">
-    <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-    <button class="btn btn-danger ml-1"><i class="far fa-trash-alt"></i></button>
+    <button class="btn btn-secondary" (click)="edit()">
+      <i class="fas fa-edit"></i>
+    </button>
+    <button class="btn btn-danger ml-1" (click)="remove()">
+      <span *ngIf="isRemoving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <i *ngIf="!isRemoving" class="far fa-trash-alt"></i>
+    </button>
   </div>
 </div>
 

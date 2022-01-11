@@ -4,3 +4,6 @@
   margin: 70px auto;
 }
 
+input.ng-touched.ng-invalid {
+  border: 1px solid #dc3545;
+}

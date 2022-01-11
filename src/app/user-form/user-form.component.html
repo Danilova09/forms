@@ -1,6 +1,6 @@
 <div class="form-block">
-  <h4 class="text-center">Create user</h4>
-  <form class="form" (ngSubmit)="saveUser()" [formGroup]="userForm">
+  <h4 class="text-center">{{ isEdit ? 'Edit' : 'Create' }} user</h4>
+  <form class="form" (ngSubmit)="onSubmit()" [formGroup]="userForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text"
@@ -170,11 +170,10 @@
               </small>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-    <button class="btn btn-secondary my-5">create</button>
+    <button class="btn btn-secondary my-5" [disabled]="userForm.invalid">{{ isEdit ? 'edit' : 'create' }}</button>
   </form>
 </div>
 

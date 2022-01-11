@@ -8,7 +8,9 @@ import { UserItemComponent } from './users/user-item/user-item.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidatePhoneDirective } from './validate-phone-number.directive';
-import {  HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './app-not-found.component';
+import { RegisteredComponent } from './app-registered.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import {  HttpClientModule } from '@angular/common/http';
     UserItemComponent,
     UserFormComponent,
     ValidatePhoneDirective,
+    RegisteredComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,4 +33,4 @@ import {  HttpClientModule } from '@angular/common/http';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

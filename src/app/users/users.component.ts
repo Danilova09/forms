@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../shared/users.service';
 import { User } from '../shared/user.model';
 import { Subscription } from 'rxjs';
@@ -8,14 +8,15 @@ import { Subscription } from 'rxjs';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   users: User[] = [];
   usersSubscription!: Subscription;
   fetchingUsers = false;
   fetchingUsersSubscription!: Subscription;
+
   constructor(
     private usersService: UsersService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.usersSubscription = this.usersService.usersChange.subscribe((users: User[]) => {
@@ -31,5 +32,4 @@ export class UsersComponent implements OnInit {
     this.usersSubscription.unsubscribe();
     this.fetchingUsersSubscription.unsubscribe();
   }
-
 }
